@@ -10,5 +10,6 @@ target 'RxKiosk' do
   # Rx
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxViewController'
 
 end
