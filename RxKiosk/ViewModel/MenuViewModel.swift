@@ -44,7 +44,7 @@ class MenuViewModel: MenuViewModelType {
         let fetching = PublishSubject<Void>()
         let clearing = PublishSubject<Void>()
         let ordering = PublishSubject<Void>()
-        let incleasing = PublishSubject<(menu: ViewMenu, inc: Int)>()
+        let increasing = PublishSubject<(menu: ViewMenu, inc: Int)>()
         
         let menus = BehaviorSubject<[ViewMenu]>(value: [])
         let activating = BehaviorSubject<Bool>(value: false)
@@ -71,9 +71,9 @@ class MenuViewModel: MenuViewModelType {
         
         makeOrder = ordering.asObserver()
         
-        increaseMenuCount = incleasing.asObserver()
+        increaseMenuCount = increasing.asObserver()
         
-        incleasing.map {
+        increasing.map {
             $0.menu.countUpdated(max(0, $0.menu.count + $0.inc))}
         .withLatestFrom(menus) { (updated, originals) -> [ViewMenu] in originals.map {
             guard $0.name == updated.name
@@ -85,7 +85,6 @@ class MenuViewModel: MenuViewModelType {
         .disposed(by: disposeBag)
         
         //OUTPUT
-        
         allMenus = menus
         activated = activating.distinctUntilChanged()
         
