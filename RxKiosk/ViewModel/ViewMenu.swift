@@ -24,6 +24,10 @@ struct ViewMenu {
         self.count = count
     }
     
+    func countUpdated(_ count: Int) -> ViewMenu {
+        return ViewMenu(name: name, price: price, count: count)
+    }
+    
     func asMenuItem() -> MenuItem {
         return MenuItem(name: name, price: price)
     }
